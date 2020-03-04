@@ -107,7 +107,7 @@ configuration metadata is actually written. These days, many developers choose
 
 For information about using other forms of metadata with the Spring container, see:
 
-* <<beans-annotation-config,Annotation-based configuration>>: Spring 2.5 introduced
+* <<beans-annotation-com.config,Annotation-based configuration>>: Spring 2.5 introduced
   support for annotation-based configuration metadata.
 * <<beans-java, Java-based configuration>>: Starting with Spring 3.0, many features
   provided by the Spring JavaConfig project became part of the core Spring Framework.
@@ -124,7 +124,7 @@ beans as `<bean/>` elements inside a top-level `<beans/>` element. Java
 configuration typically uses `@Bean`-annotated methods within a `@Configuration` class.
 
 These bean definitions correspond to the actual objects that make up your application.
-Typically, you define service layer objects, data access objects (DAOs), presentation
+Typically, you define com.service layer objects, data access objects (DAOs), presentation
 objects such as Struts `Action` instances, infrastructure objects such as Hibernate
 `SessionFactories`, JMS `Queues`, and so forth. Typically, one does not configure
 fine-grained domain objects in the container, because it is usually the responsibility
@@ -195,7 +195,7 @@ mechanism for reading an InputStream from locations defined in a URI syntax. In 
 `Resource` paths are used to construct applications contexts, as described in <<resources-app-ctx>>.
 ====
 
-The following example shows the service layer objects `(services.xml)` configuration file:
+The following example shows the com.service layer objects `(services.xml)` configuration file:
 
 [source,xml,indent=0,subs="verbatim,quotes"]
 ----
@@ -242,7 +242,7 @@ The following example shows the data access objects `daos.xml` file:
 	</beans>
 ----
 
-In the preceding example, the service layer consists of the `PetStoreServiceImpl` class
+In the preceding example, the com.service layer consists of the `PetStoreServiceImpl` class
 and two data access objects of the types `JpaAccountDao` and `JpaItemDao` (based
 on the JPA Object-Relational Mapping standard). The `property name` element refers to the
 name of the JavaBean property, and the `ref` element refers to the name of another bean
@@ -295,7 +295,7 @@ example, `classpath:../services.xml`), where the runtime resolution process choo
 configuration changes may lead to the choice of a different, incorrect directory.
 
 You can always use fully qualified resource locations instead of relative paths: for
-example, `file:C:/config/services.xml` or `classpath:/config/services.xml`. However, be
+example, `file:C:/com.config/services.xml` or `classpath:/com.config/services.xml`. However, be
 aware that you are coupling your application's configuration to specific absolute
 locations. It is generally preferable to keep an indirection for such absolute
 locations -- for example, through "${...}" placeholders that are resolved against JVM
@@ -359,10 +359,10 @@ example shows:
 	ApplicationContext context = new ClassPathXmlApplicationContext("services.xml", "daos.xml");
 
 	// retrieve configured instance
-	PetStoreService service = context.getBean("petStore", PetStoreService.class);
+	PetStoreService com.service = context.getBean("petStore", PetStoreService.class);
 
 	// use configured instance
-	List<String> userList = service.getUsernameList();
+	List<String> userList = com.service.getUsernameList();
 ----
 .Kotlin
 [source,kotlin,indent=0,subs="verbatim,quotes",role="secondary"]
@@ -373,10 +373,10 @@ example shows:
     val context = ClassPathXmlApplicationContext("services.xml", "daos.xml")
 
     // retrieve configured instance
-    val service = context.getBean<PetStoreService>("petStore")
+    val com.service = context.getBean<PetStoreService>("petStore")
 
     // use configured instance
-    var userList = service.getUsernameList()
+    var userList = com.service.getUsernameList()
 ----
 
 With Groovy configuration, bootstrapping looks very similar. It has a different context
@@ -1443,7 +1443,7 @@ purpose.
 
 The `value` attribute of the `<property/>` element specifies a property or constructor
 argument as a human-readable string representation. Spring's
-<<core-convert-ConversionService-API, conversion service>> is used to convert these
+<<core-convert-ConversionService-API, conversion com.service>> is used to convert these
 values from a `String` to the actual type of the property or argument.
 The following example shows various values being set:
 
@@ -2214,7 +2214,7 @@ In the latter scenario, you have several options:
 * Designate a single bean definition as the primary candidate by setting the
   `primary` attribute of its `<bean/>` element to `true`.
 * Implement the more fine-grained control available with annotation-based configuration,
-  as described in <<beans-annotation-config>>.
+  as described in <<beans-annotation-com.config>>.
 
 
 
@@ -2524,7 +2524,7 @@ Another way of accessing differently scoped target beans is an `ObjectFactory`/
 `Provider` injection point. See <<beans-factory-scopes-other-injection>>.
 
 You may also find the `ServiceLocatorFactoryBean` (in the
-`org.springframework.beans.factory.config` package) to be useful.
+`org.springframework.beans.factory.com.config` package) to be useful.
 ====
 
 
@@ -3167,10 +3167,10 @@ and you cannot override the built-in `singleton` and `prototype` scopes.
 ==== Creating a Custom Scope
 
 To integrate your custom scopes into the Spring container, you need to implement the
-`org.springframework.beans.factory.config.Scope` interface, which is described in this
+`org.springframework.beans.factory.com.config.Scope` interface, which is described in this
 section. For an idea of how to implement your own scopes, see the `Scope`
 implementations that are supplied with the Spring Framework itself and the
-{api-spring-framework}/beans/factory/config/Scope.html[`Scope`] javadoc,
+{api-spring-framework}/beans/factory/com.config/Scope.html[`Scope`] javadoc,
 which explains the methods you need to implement in more detail.
 
 The `Scope` interface has four methods to get objects from the scope, remove them from
@@ -3222,7 +3222,7 @@ destroyed or when the specified object in the scope is destroyed:
 	fun registerDestructionCallback(name: String, destructionCallback: Runnable)
 ----
 
-See the {api-spring-framework}/beans/factory/config/Scope.html#registerDestructionCallback[javadoc]
+See the {api-spring-framework}/beans/factory/com.config/Scope.html#registerDestructionCallback[javadoc]
 or a Spring scope implementation for more information on destruction callbacks.
 
 The following method obtains the conversation identifier for the underlying scope:
@@ -3314,7 +3314,7 @@ of the scope. You can also do the `Scope` registration declaratively, by using t
 			http://www.springframework.org/schema/aop
 			https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-		<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		<bean class="org.springframework.beans.factory.com.config.CustomScopeConfigurer">
 			<property name="scopes">
 				<map>
 					<entry key="thread">
@@ -4175,7 +4175,7 @@ in which these `BeanPostProcessor` instances execute by setting the `order` prop
 You can set this property only if the `BeanPostProcessor` implements the `Ordered`
 interface. If you write your own `BeanPostProcessor`, you should consider implementing
 the `Ordered` interface, too. For further details, see the javadoc of the
-{api-spring-framework}/beans/factory/config/BeanPostProcessor.html[`BeanPostProcessor`]
+{api-spring-framework}/beans/factory/com.config/BeanPostProcessor.html[`BeanPostProcessor`]
 and {api-spring-framework}/core/Ordered.html[`Ordered`] interfaces. See also the note
 on <<beans-factory-programmatically-registering-beanpostprocessors, programmatic
 registration of `BeanPostProcessor` instances>>.
@@ -4197,7 +4197,7 @@ you instead need to use a `BeanFactoryPostProcessor`, as described in
 <<beans-factory-extension-factory-postprocessors>>.
 ====
 
-The `org.springframework.beans.factory.config.BeanPostProcessor` interface consists of
+The `org.springframework.beans.factory.com.config.BeanPostProcessor` interface consists of
 exactly two callback methods. When such a class is registered as a post-processor with
 the container, for each bean instance that is created by the container, the
 post-processor gets a callback from the container both before container
@@ -4216,7 +4216,7 @@ same fashion as any other beans.
 
 Note that, when declaring a `BeanPostProcessor` by using an `@Bean` factory method on a
 configuration class, the return type of the factory method should be the implementation
-class itself or at least the `org.springframework.beans.factory.config.BeanPostProcessor`
+class itself or at least the `org.springframework.beans.factory.com.config.BeanPostProcessor`
 interface, clearly indicating the post-processor nature of that bean. Otherwise, the
 `ApplicationContext` cannot autodetect it by type before fully creating it.
 Since a `BeanPostProcessor` needs to be instantiated early in order to apply to the
@@ -4278,7 +4278,7 @@ The following listing shows the custom `BeanPostProcessor` implementation class 
 ----
 	package scripting;
 
-	import org.springframework.beans.factory.config.BeanPostProcessor;
+	import org.springframework.beans.factory.com.config.BeanPostProcessor;
 
 	public class InstantiationTracingBeanPostProcessor implements BeanPostProcessor {
 
@@ -4296,7 +4296,7 @@ The following listing shows the custom `BeanPostProcessor` implementation class 
 [source,kotlin,indent=0,subs="verbatim,quotes",role="secondary"]
 .Kotlin
 ----
-	import org.springframework.beans.factory.config.BeanPostProcessor
+	import org.springframework.beans.factory.com.config.BeanPostProcessor
 
 	class InstantiationTracingBeanPostProcessor : BeanPostProcessor {
 
@@ -4401,7 +4401,7 @@ actually (configured to be) dependency-injected with a value.
 === Customizing Configuration Metadata with a `BeanFactoryPostProcessor`
 
 The next extension point that we look at is the
-`org.springframework.beans.factory.config.BeanFactoryPostProcessor`. The semantics of
+`org.springframework.beans.factory.com.config.BeanFactoryPostProcessor`. The semantics of
 this interface are similar to those of the `BeanPostProcessor`, with one major
 difference: `BeanFactoryPostProcessor` operates on the bean configuration metadata.
 That is, the Spring IoC container lets a `BeanFactoryPostProcessor` read the
@@ -4413,7 +4413,7 @@ which these `BeanFactoryPostProcessor` instances run by setting the `order` prop
 However, you can only set this property if the `BeanFactoryPostProcessor` implements the
 `Ordered` interface. If you write your own `BeanFactoryPostProcessor`, you should
 consider implementing the `Ordered` interface, too. See the javadoc of the
-{api-spring-framework}/beans/factory/config/BeanFactoryPostProcessor.html[`BeanFactoryPostProcessor`] and {api-spring-framework}/core/Ordered.html[`Ordered`] interfaces for more details.
+{api-spring-framework}/beans/factory/com.config/BeanFactoryPostProcessor.html[`BeanFactoryPostProcessor`] and {api-spring-framework}/core/Ordered.html[`Ordered`] interfaces for more details.
 
 [NOTE]
 ====
@@ -4520,7 +4520,7 @@ The following example shows how to do so:
 
 [source,xml,indent=0,subs="verbatim,quotes"]
 ----
-	<bean class="org.springframework.beans.factory.config.PropertySourcesPlaceholderConfigurer">
+	<bean class="org.springframework.beans.factory.com.config.PropertySourcesPlaceholderConfigurer">
 		<property name="locations">
 			<value>classpath:com/something/strategy.properties</value>
 		</property>
@@ -4630,7 +4630,7 @@ product of the `FactoryBean`, whereas invoking `getBean("&myBean")` returns the
 
 
 
-[[beans-annotation-config]]
+[[beans-annotation-com.config]]
 == Annotation-based Container Configuration
 
 .Are annotations better than XML for configuring Spring?
@@ -4690,7 +4690,7 @@ configuration (notice the inclusion of the `context` namespace):
 			http://www.springframework.org/schema/context
 			https://www.springframework.org/schema/context/spring-context.xsd">
 
-		<context:annotation-config/>
+		<context:annotation-com.config/>
 
 	</beans>
 ----
@@ -4704,9 +4704,9 @@ and the aforementioned
 
 [NOTE]
 ====
-`<context:annotation-config/>` only looks for annotations on beans in the same
+`<context:annotation-com.config/>` only looks for annotations on beans in the same
 application context in which it is defined. This means that, if you put
-`<context:annotation-config/>` in a `WebApplicationContext` for a `DispatcherServlet`,
+`<context:annotation-com.config/>` in a `WebApplicationContext` for a `DispatcherServlet`,
 it only checks for `@Autowired` beans in your controllers, and not your services. See
 <<web.adoc#mvc-servlet, The DispatcherServlet>> for more information.
 ====
@@ -5271,7 +5271,7 @@ The corresponding bean definitions follow:
 			http://www.springframework.org/schema/context
 			https://www.springframework.org/schema/context/spring-context.xsd">
 
-		<context:annotation-config/>
+		<context:annotation-com.config/>
 
 		<bean class="example.SimpleMovieCatalog" primary="true">
 			<!-- inject any dependencies required by this bean -->
@@ -5378,7 +5378,7 @@ The following example shows corresponding bean definitions.
 			http://www.springframework.org/schema/context
 			https://www.springframework.org/schema/context/spring-context.xsd">
 
-		<context:annotation-config/>
+		<context:annotation-com.config/>
 
 		<bean class="example.SimpleMovieCatalog">
 			<qualifier value="main"/> <1>
@@ -5557,7 +5557,7 @@ demonstrates both approaches:
 			http://www.springframework.org/schema/context
 			https://www.springframework.org/schema/context/spring-context.xsd">
 
-		<context:annotation-config/>
+		<context:annotation-com.config/>
 
 		<bean class="example.SimpleMovieCatalog">
 			<qualifier type="Genre" value="Action"/>
@@ -5760,7 +5760,7 @@ the following example:
 			http://www.springframework.org/schema/context
 			https://www.springframework.org/schema/context/spring-context.xsd">
 
-		<context:annotation-config/>
+		<context:annotation-com.config/>
 
 		<bean class="example.SimpleMovieCatalog">
 			<qualifier type="MovieQualifier">
@@ -6302,7 +6302,7 @@ Central now, simply to be added to the application's classpath like any other li
 
 Most examples in this chapter use XML to specify the configuration metadata that produces
 each `BeanDefinition` within the Spring container. The previous section
-(<<beans-annotation-config>>) demonstrates how to provide a lot of the configuration
+(<<beans-annotation-com.config>>) demonstrates how to provide a lot of the configuration
 metadata through source-level annotations. Even in those examples, however, the "`base`"
 bean definitions are explicitly defined in the XML file, while the annotations drive only
 the dependency injection. This section describes an option for implicitly detecting the
@@ -6334,14 +6334,14 @@ of this marker is the automatic translation of exceptions, as described in
 Spring provides further stereotype annotations: `@Component`, `@Service`, and
 `@Controller`. `@Component` is a generic stereotype for any Spring-managed component.
 `@Repository`, `@Service`, and `@Controller` are specializations of `@Component` for
-more specific use cases (in the persistence, service, and presentation
+more specific use cases (in the persistence, com.service, and presentation
 layers, respectively). Therefore, you can annotate your component classes with
 `@Component`, but, by annotating them with `@Repository`, `@Service`, or `@Controller`
 instead, your classes are more properly suited for processing by tools or associating
 with aspects. For example, these stereotype annotations make ideal targets for
 pointcuts. `@Repository`, `@Service`, and `@Controller` can also
 carry additional semantics in future releases of the Spring Framework. Thus, if you are
-choosing between using `@Component` or `@Service` for your service layer, `@Service` is
+choosing between using `@Component` or `@Service` for your com.service layer, `@Service` is
 clearly the better choice. Similarly, as stated earlier, `@Repository` is already
 supported as a marker for automatic exception translation in your persistence layer.
 
@@ -6564,8 +6564,8 @@ The following alternative uses XML:
 ----
 
 TIP: The use of `<context:component-scan>` implicitly enables the functionality of
-`<context:annotation-config>`. There is usually no need to include the
-`<context:annotation-config>` element when using `<context:component-scan>`.
+`<context:annotation-com.config>`. There is usually no need to include the
+`<context:annotation-com.config>` element when using `<context:component-scan>`.
 
 [NOTE]
 ====
@@ -6589,7 +6589,7 @@ component-scan element. That means that the two components are autodetected and
 wired together -- all without any bean configuration metadata provided in XML.
 
 NOTE: You can disable the registration of `AutowiredAnnotationBeanPostProcessor` and
-`CommonAnnotationBeanPostProcessor` by including the `annotation-config` attribute
+`CommonAnnotationBeanPostProcessor` by including the `annotation-com.config` attribute
 with a value of `false`.
 
 
@@ -7664,7 +7664,7 @@ When `@Bean` methods are declared within classes that are not annotated with
 `@Configuration`, they are referred to as being processed in a "`lite`" mode. Bean methods
 declared in a `@Component` or even in a plain old class are considered to be "`lite`",
 with a different primary purpose of the containing class and a `@Bean` method
-being a sort of bonus there. For example, service components may expose management views
+being a sort of bonus there. For example, com.service components may expose management views
 to the container through an additional `@Bean` method on each applicable component class.
 In such scenarios, `@Bean` methods are a general-purpose factory method mechanism.
 
@@ -7923,7 +7923,7 @@ init-param):
 					org.springframework.web.context.support.AnnotationConfigWebApplicationContext
 				</param-value>
 			</init-param>
-			<!-- Again, config locations must consist of one or more comma- or space-delimited
+			<!-- Again, com.config locations must consist of one or more comma- or space-delimited
 				and fully-qualified @Configuration classes -->
 			<init-param>
 				<param-name>contextConfigLocation</param-name>
@@ -8040,7 +8040,7 @@ so you may see different type matching results depending on when another compone
 tries to match by a non-declared type (such as `@Autowired TransferServiceImpl`,
 which resolves only once the `transferService` bean has been instantiated).
 
-TIP: If you consistently refer to your types by a declared service interface, your
+TIP: If you consistently refer to your types by a declared com.service interface, your
 `@Bean` return types may safely join that design decision. However, for components
 that implement several interfaces or for components potentially referred to by their
 implementation type, it is safer to declare the most specific return type possible
@@ -8311,10 +8311,10 @@ it resembles the following:
 
 	@Bean
 	public Service userService() {
-		UserService service = new SimpleUserService();
+		UserService com.service = new SimpleUserService();
 		// a reference to the proxied userPreferences bean
-		service.setUserPreferences(userPreferences());
-		return service;
+		com.service.setUserPreferences(userPreferences());
+		return com.service;
 	}
 ----
 [source,kotlin,indent=0,subs="verbatim,quotes",role="secondary"]
@@ -8583,7 +8583,7 @@ the abstract `createCommand()` method is overridden in such a way that it looks 
 ----
 
 
-[[beans-java-further-information-java-config]]
+[[beans-java-further-information-java-com.config]]
 ==== Further Information About How Java-based Configuration Works Internally
 
 Consider the following example, which shows a `@Bean` annotated method being called twice:
@@ -8643,7 +8643,7 @@ Consider the following example, which shows a `@Bean` annotated method being cal
 
 `clientDao()` has been called once in `clientService1()` and once in `clientService2()`.
 Since this method creates a new instance of `ClientDaoImpl` and returns it, you would
-normally expect to have two instances (one for each service). That definitely would be
+normally expect to have two instances (one for each com.service). That definitely would be
 problematic: In Spring, instantiated beans have a `singleton` scope by default. This is
 where the magic comes in: All `@Configuration` classes are subclassed at startup-time
 with `CGLIB`. In the subclass, the child method checks the container first for any
@@ -9005,7 +9005,7 @@ configuration classes themselves. The following example shows how to do so:
 
 		@Bean
 		public TransferService transferService() {
-			// navigate 'through' the config class to the @Bean method!
+			// navigate 'through' the com.config class to the @Bean method!
 			return new TransferServiceImpl(repositoryConfig.accountRepository());
 		}
 	}
@@ -9021,7 +9021,7 @@ class ServiceConfig {
 
 	@Bean
 	fun transferService(): TransferService {
-		// navigate 'through' the config class to the @Bean method!
+		// navigate 'through' the com.config class to the @Bean method!
 		return TransferServiceImpl(repositoryConfig.accountRepository())
 	}
 }
@@ -9064,7 +9064,7 @@ abstract class-based `@Configuration` classes. Consider the following example:
 	}
 
 	@Configuration
-	@Import({ServiceConfig.class, DefaultRepositoryConfig.class})  // import the concrete config!
+	@Import({ServiceConfig.class, DefaultRepositoryConfig.class})  // import the concrete com.config!
 	public class SystemTestConfig {
 
 		@Bean
@@ -9114,7 +9114,7 @@ abstract class-based `@Configuration` classes. Consider the following example:
 	}
 
 	@Configuration
-	@Import(ServiceConfig::class, DefaultRepositoryConfig::class)  // import the concrete config!
+	@Import(ServiceConfig::class, DefaultRepositoryConfig::class)  // import the concrete com.config!
 	class SystemTestConfig {
 
 		@Bean
@@ -9227,8 +9227,8 @@ options for using `@Configuration` classes in this kind of "`XML-centric`" situa
 --
 Remember that `@Configuration` classes are ultimately bean definitions in the
 container. In this series examples, we create a `@Configuration` class named `AppConfig` and
-include it within `system-test-config.xml` as a `<bean/>` definition. Because
-`<context:annotation-config/>` is switched on, the container recognizes the
+include it within `system-test-com.config.xml` as a `<bean/>` definition. Because
+`<context:annotation-com.config/>` is switched on, the container recognizes the
 `@Configuration` annotation and processes the `@Bean` methods declared in `AppConfig`
 properly.
 
@@ -9273,13 +9273,13 @@ The following example shows an ordinary configuration class in Java:
 	}
 ----
 
-The following example shows part of a sample `system-test-config.xml` file:
+The following example shows part of a sample `system-test-com.config.xml` file:
 
 [source,xml,indent=0,subs="verbatim,quotes"]
 ----
 	<beans>
 		<!-- enable processing of annotations such as @Autowired and @Configuration -->
-		<context:annotation-config/>
+		<context:annotation-com.config/>
 		<context:property-placeholder location="classpath:/com/acme/jdbc.properties"/>
 
 		<bean class="com.acme.AppConfig"/>
@@ -9305,7 +9305,7 @@ jdbc.password=
 .Java
 ----
 	public static void main(String[] args) {
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:/com/acme/system-test-config.xml");
+		ApplicationContext ctx = new ClassPathXmlApplicationContext("classpath:/com/acme/system-test-com.config.xml");
 		TransferService transferService = ctx.getBean(TransferService.class);
 		// ...
 	}
@@ -9314,14 +9314,14 @@ jdbc.password=
 .Kotlin
 ----
 	fun main() {
-		val ctx = ClassPathXmlApplicationContext("classpath:/com/acme/system-test-config.xml")
+		val ctx = ClassPathXmlApplicationContext("classpath:/com/acme/system-test-com.config.xml")
 		val transferService = ctx.getBean<TransferService>()
 		// ...
 	}
 ----
 
 
-NOTE: In `system-test-config.xml` file, the `AppConfig` `<bean/>` does not declare an `id`
+NOTE: In `system-test-com.config.xml` file, the `AppConfig` `<bean/>` does not declare an `id`
 element. While it would be acceptable to do so, it is unnecessary, given that no other bean
 ever refers to it, and it is unlikely to be explicitly fetched from the container by name.
 Similarly, the `DataSource` bean is only ever autowired by type, so an explicit bean `id`
@@ -9332,12 +9332,12 @@ is not strictly required.
 --
 Because `@Configuration` is meta-annotated with `@Component`, `@Configuration`-annotated
 classes are automatically candidates for component scanning. Using the same scenario as
-describe in the previous example, we can redefine `system-test-config.xml` to take advantage of component-scanning.
+describe in the previous example, we can redefine `system-test-com.config.xml` to take advantage of component-scanning.
 Note that, in this case, we need not explicitly declare
-`<context:annotation-config/>`, because `<context:component-scan/>` enables the same
+`<context:annotation-com.config/>`, because `<context:component-scan/>` enables the same
 functionality.
 
-The following example shows the modified `system-test-config.xml` file:
+The following example shows the modified `system-test-com.config.xml` file:
 
 [source,xml,indent=0,subs="verbatim,quotes"]
 ----
@@ -9371,7 +9371,7 @@ as needed:
 .Java
 ----
 	@Configuration
-	@ImportResource("classpath:/com/acme/properties-config.xml")
+	@ImportResource("classpath:/com/acme/properties-com.config.xml")
 	public class AppConfig {
 
 		@Value("${jdbc.url}")
@@ -9393,7 +9393,7 @@ as needed:
 .Kotlin
 ----
 	@Configuration
-	@ImportResource("classpath:/com/acme/properties-config.xml")
+	@ImportResource("classpath:/com/acme/properties-com.config.xml")
 	class AppConfig {
 
 		@Value("\${jdbc.url}")
@@ -9414,7 +9414,7 @@ as needed:
 
 [source,xml,indent=0,subs="verbatim,quotes"]
 ----
-	properties-config.xml
+	properties-com.config.xml
 	<beans>
 		<context:property-placeholder location="classpath:/com/acme/jdbc.properties"/>
 	</beans>
@@ -9469,7 +9469,7 @@ Properties play an important role in almost all applications and may originate f
 a variety of sources: properties files, JVM system properties, system environment
 variables, JNDI, servlet context parameters, ad-hoc `Properties` objects, `Map` objects, and so
 on. The role of the `Environment` object with relation to properties is to provide the
-user with a convenient service interface for configuring property sources and resolving
+user with a convenient com.service interface for configuring property sources and resolving
 properties from them.
 
 
@@ -9575,8 +9575,8 @@ can rewrite the `dataSource` configuration as follows:
 		public DataSource dataSource() {
 			return new EmbeddedDatabaseBuilder()
 				.setType(EmbeddedDatabaseType.HSQL)
-				.addScript("classpath:com/bank/config/sql/schema.sql")
-				.addScript("classpath:com/bank/config/sql/test-data.sql")
+				.addScript("classpath:com/bank/com.config/sql/schema.sql")
+				.addScript("classpath:com/bank/com.config/sql/test-data.sql")
 				.build();
 		}
 	}
@@ -9592,8 +9592,8 @@ can rewrite the `dataSource` configuration as follows:
 		fun dataSource(): DataSource {
 			return EmbeddedDatabaseBuilder()
 					.setType(EmbeddedDatabaseType.HSQL)
-					.addScript("classpath:com/bank/config/sql/schema.sql")
-					.addScript("classpath:com/bank/config/sql/test-data.sql")
+					.addScript("classpath:com/bank/com.config/sql/schema.sql")
+					.addScript("classpath:com/bank/com.config/sql/test-data.sql")
 					.build()
 		}
 	}
@@ -9693,8 +9693,8 @@ the following example shows:
 		public DataSource standaloneDataSource() {
 			return new EmbeddedDatabaseBuilder()
 				.setType(EmbeddedDatabaseType.HSQL)
-				.addScript("classpath:com/bank/config/sql/schema.sql")
-				.addScript("classpath:com/bank/config/sql/test-data.sql")
+				.addScript("classpath:com/bank/com.config/sql/schema.sql")
+				.addScript("classpath:com/bank/com.config/sql/test-data.sql")
 				.build();
 		}
 
@@ -9720,8 +9720,8 @@ the following example shows:
 		fun standaloneDataSource(): DataSource {
 			return EmbeddedDatabaseBuilder()
 					.setType(EmbeddedDatabaseType.HSQL)
-					.addScript("classpath:com/bank/config/sql/schema.sql")
-					.addScript("classpath:com/bank/config/sql/test-data.sql")
+					.addScript("classpath:com/bank/com.config/sql/schema.sql")
+					.addScript("classpath:com/bank/com.config/sql/test-data.sql")
 					.build()
 		}
 
@@ -9769,8 +9769,8 @@ configuration can be rewritten in two XML files, as follows:
 		xsi:schemaLocation="...">
 
 		<jdbc:embedded-database id="dataSource">
-			<jdbc:script location="classpath:com/bank/config/sql/schema.sql"/>
-			<jdbc:script location="classpath:com/bank/config/sql/test-data.sql"/>
+			<jdbc:script location="classpath:com/bank/com.config/sql/schema.sql"/>
+			<jdbc:script location="classpath:com/bank/com.config/sql/test-data.sql"/>
 		</jdbc:embedded-database>
 	</beans>
 ----
@@ -9802,8 +9802,8 @@ as the following example shows:
 
 		<beans profile="development">
 			<jdbc:embedded-database id="dataSource">
-				<jdbc:script location="classpath:com/bank/config/sql/schema.sql"/>
-				<jdbc:script location="classpath:com/bank/config/sql/test-data.sql"/>
+				<jdbc:script location="classpath:com/bank/com.config/sql/schema.sql"/>
+				<jdbc:script location="classpath:com/bank/com.config/sql/test-data.sql"/>
 			</jdbc:embedded-database>
 		</beans>
 
@@ -9926,7 +9926,7 @@ following example:
 		public DataSource dataSource() {
 			return new EmbeddedDatabaseBuilder()
 				.setType(EmbeddedDatabaseType.HSQL)
-				.addScript("classpath:com/bank/config/sql/schema.sql")
+				.addScript("classpath:com/bank/com.config/sql/schema.sql")
 				.build();
 		}
 	}
@@ -9942,7 +9942,7 @@ following example:
 		fun dataSource(): DataSource {
 			return EmbeddedDatabaseBuilder()
 					.setType(EmbeddedDatabaseType.HSQL)
-					.addScript("classpath:com/bank/config/sql/schema.sql")
+					.addScript("classpath:com/bank/com.config/sql/schema.sql")
 					.build()
 		}
 	}
@@ -9991,7 +9991,7 @@ is configured with two PropertySource objects -- one representing the set of JVM
 
 NOTE: These default property sources are present for `StandardEnvironment`, for use in standalone
 applications. {api-spring-framework}/web/context/support/StandardServletEnvironment.html[`StandardServletEnvironment`]
-is populated with additional default property sources including servlet config and servlet
+is populated with additional default property sources including servlet com.config and servlet
 context parameters. It can optionally enable a {api-spring-framework}/jndi/JndiPropertySource.html[`JndiPropertySource`].
 See the javadoc for details.
 
@@ -10162,7 +10162,7 @@ property is defined, as long as it is available in the `Environment`:
 [source,xml,indent=0,subs="verbatim,quotes"]
 ----
 	<beans>
-		<import resource="com/bank/service/${customer}-config.xml"/>
+		<import resource="com/bank/com.service/${customer}-com.config.xml"/>
 	</beans>
 ----
 

@@ -969,7 +969,7 @@ class DefaultConversionServiceTests {
 	@EnabledForTestGroups(PERFORMANCE)
 	void testPerformance1() {
 		StopWatch watch = new StopWatch("integer->string conversionPerformance");
-		watch.start("convert 4,000,000 with conversion service");
+		watch.start("convert 4,000,000 with conversion com.service");
 		for (int i = 0; i < 4000000; i++) {
 			conversionService.convert(3, String.class);
 		}

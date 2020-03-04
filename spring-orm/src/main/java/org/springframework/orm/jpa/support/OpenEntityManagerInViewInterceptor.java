@@ -41,7 +41,7 @@ import org.springframework.web.context.request.async.WebAsyncUtils;
  * web views despite the original transactions already being completed.
  *
  * <p>This interceptor makes JPA EntityManagers available via the current thread,
- * which will be autodetected by transaction managers. It is suitable for service
+ * which will be autodetected by transaction managers. It is suitable for com.service
  * layer transactions via {@link org.springframework.orm.jpa.JpaTransactionManager}
  * or {@link org.springframework.transaction.jta.JtaTransactionManager} as well
  * as for non-transactional read-only execution.

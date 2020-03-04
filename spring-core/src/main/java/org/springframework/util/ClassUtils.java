@@ -825,7 +825,7 @@ public abstract class ClassUtils {
 	 * Determine whether the given interface is a common Java language interface:
 	 * {@link Serializable}, {@link Externalizable}, {@link Closeable}, {@link AutoCloseable},
 	 * {@link Cloneable}, {@link Comparable} - all of which can be ignored when looking
-	 * for 'primary' user-level interfaces. Common characteristics: no service-level
+	 * for 'primary' user-level interfaces. Common characteristics: no com.service-level
 	 * operations, no bean property methods, no default methods.
 	 * @param ifc the interface to check
 	 * @since 5.0.3

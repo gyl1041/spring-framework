@@ -186,7 +186,7 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 	/**
 	 * Create a nested ServletInvocableHandlerMethod subclass that returns the
 	 * the given value (or raises an Exception if the value is one) rather than
-	 * actually invoking the controller method. This is useful when processing
+	 * actually invoking the com.controller method. This is useful when processing
 	 * async return values (e.g. Callable, DeferredResult, ListenableFuture).
 	 */
 	ServletInvocableHandlerMethod wrapConcurrentResult(Object result) {
@@ -196,7 +196,7 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 
 	/**
 	 * A nested subclass of {@code ServletInvocableHandlerMethod} that uses a
-	 * simple {@link Callable} instead of the original controller as the handler in
+	 * simple {@link Callable} instead of the original com.controller as the handler in
 	 * order to return the fixed (concurrent) result value given to it. Effectively
 	 * "resumes" processing with the asynchronously produced return value.
 	 */
@@ -222,7 +222,7 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 		}
 
 		/**
-		 * Bridge to actual controller type-level annotations.
+		 * Bridge to actual com.controller type-level annotations.
 		 */
 		@Override
 		public Class<?> getBeanType() {
@@ -239,7 +239,7 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 		}
 
 		/**
-		 * Bridge to controller method-level annotations.
+		 * Bridge to com.controller method-level annotations.
 		 */
 		@Override
 		public <A extends Annotation> A getMethodAnnotation(Class<A> annotationType) {
@@ -247,7 +247,7 @@ public class ServletInvocableHandlerMethod extends InvocableHandlerMethod {
 		}
 
 		/**
-		 * Bridge to controller method-level annotations.
+		 * Bridge to com.controller method-level annotations.
 		 */
 		@Override
 		public <A extends Annotation> boolean hasMethodAnnotation(Class<A> annotationType) {

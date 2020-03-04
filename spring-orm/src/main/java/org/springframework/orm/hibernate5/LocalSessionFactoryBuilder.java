@@ -150,7 +150,7 @@ public class LocalSessionFactoryBuilder extends Configuration {
 	 * @param dataSource the JDBC DataSource that the resulting Hibernate SessionFactory should be using
 	 * (may be {@code null})
 	 * @param resourceLoader the ResourceLoader to load application classes from
-	 * @param metadataSources the Hibernate MetadataSources service to use (e.g. reusing an existing one)
+	 * @param metadataSources the Hibernate MetadataSources com.service to use (e.g. reusing an existing one)
 	 * @since 4.3
 	 */
 	public LocalSessionFactoryBuilder(

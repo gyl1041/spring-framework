@@ -16,7 +16,7 @@
 		]]></xsd:documentation>
 	</xsd:annotation>
 
-	<xsd:element name="config">
+	<xsd:element name="com.config">
 		<xsd:annotation>
 			<xsd:documentation><![CDATA[
 	A section (compartmentalization) of AOP-specific configuration (including
@@ -238,7 +238,7 @@
 				<xsd:documentation><![CDATA[
 	The pointcut expression.
 
-	For example : 'execution(* com.xyz.myapp.service.*.*(..))'
+	For example : 'execution(* com.xyz.myapp.com.service.*.*(..))'
 				]]></xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>

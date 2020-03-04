@@ -8,7 +8,7 @@
 :docinfo1:
 
 This part of the reference documentation is concerned with data access and the
-interaction between the data access layer and the business or service layer.
+interaction between the data access layer and the business or com.service layer.
 
 Spring's comprehensive transaction management support is covered in some detail,
 followed by thorough coverage of the various data access frameworks and technologies
@@ -182,7 +182,7 @@ strategy. A transaction strategy is defined by the
 	}
 ---- 
 
-This is primarily a service provider interface (SPI), although you can use it
+This is primarily a com.service provider interface (SPI), although you can use it
 <<transaction-programmatic-ptm, programmatically>> from your application code. Because
 `PlatformTransactionManager` is an interface, it can be easily mocked or stubbed as
 necessary. It is not tied to a lookup strategy, such as JNDI.
@@ -566,9 +566,9 @@ transactions be created and then rolled back in response to the
 [source,java,indent=0,subs="verbatim,quotes",role="primary"]
 .Java
 ----
-	// the service interface that we want to make transactional
+	// the com.service interface that we want to make transactional
 
-	package x.y.service;
+	package x.y.com.service;
 
 	public interface FooService {
 
@@ -585,9 +585,9 @@ transactions be created and then rolled back in response to the
 [source,kotlin,indent=0,subs="verbatim,quotes",role="secondary"]
 .Kotlin
 ----
-	// the service interface that we want to make transactional
+	// the com.service interface that we want to make transactional
 
-	package x.y.service
+	package x.y.com.service
 
 	interface FooService {
 
@@ -606,7 +606,7 @@ The following example shows an implementation of the preceding interface:
 [source,java,indent=0,subs="verbatim,quotes",role="primary"]
 .Java
 ----
-	package x.y.service;
+	package x.y.com.service;
 
 	public class DefaultFooService implements FooService {
 
@@ -634,7 +634,7 @@ The following example shows an implementation of the preceding interface:
 [source,kotlin,indent=0,subs="verbatim,quotes",role="secondary"]
 .Kotlin
 ----
-	package x.y.service
+	package x.y.com.service
 
 	class DefaultFooService : FooService {
 
@@ -678,8 +678,8 @@ configuration is explained in detail in the next few paragraphs:
 			http://www.springframework.org/schema/aop
 			https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-		<!-- this is the service object that we want to make transactional -->
-		<bean id="fooService" class="x.y.service.DefaultFooService"/>
+		<!-- this is the com.service object that we want to make transactional -->
+		<bean id="fooService" class="x.y.com.service.DefaultFooService"/>
 
 		<!-- the transactional advice (what 'happens'; see the <aop:advisor/> bean below) -->
 		<tx:advice id="txAdvice" transaction-manager="txManager">
@@ -694,10 +694,10 @@ configuration is explained in detail in the next few paragraphs:
 
 		<!-- ensure that the above transactional advice runs for any execution
 			of an operation defined by the FooService interface -->
-		<aop:config>
-			<aop:pointcut id="fooServiceOperation" expression="execution(* x.y.service.FooService.*(..))"/>
+		<aop:com.config>
+			<aop:pointcut id="fooServiceOperation" expression="execution(* x.y.com.service.FooService.*(..))"/>
 			<aop:advisor advice-ref="txAdvice" pointcut-ref="fooServiceOperation"/>
-		</aop:config>
+		</aop:com.config>
 
 		<!-- don't forget the DataSource -->
 		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -717,7 +717,7 @@ configuration is explained in detail in the next few paragraphs:
 	</beans>
 ----
 
-Examine the preceding configuration. It assumes that you want to make a service object, the `fooService`
+Examine the preceding configuration. It assumes that you want to make a com.service object, the `fooService`
 bean, transactional. The transaction semantics to apply are encapsulated in the
 `<tx:advice/>` definition. The `<tx:advice/>` definition reads as "`all methods, on
 starting with `get`, are to execute in the context of a read-only transaction, and all
@@ -732,7 +732,7 @@ wire in has the name `transactionManager`. If the `PlatformTransactionManager` b
 you want to wire in has any other name, you must use the `transaction-manager`
 attribute explicitly, as in the preceding example.
 
-The `<aop:config/>` definition ensures that the transactional advice defined by the
+The `<aop:com.config/>` definition ensures that the transactional advice defined by the
 `txAdvice` bean executes at the appropriate points in the program. First, you define a
 pointcut that matches the execution of any operation defined in the `FooService` interface
 (`fooServiceOperation`). Then you associate the pointcut with the `txAdvice` by using an
@@ -743,20 +743,20 @@ The expression defined within the `<aop:pointcut/>` element is an AspectJ pointc
 expression. See <<core.adoc#aop, the AOP section>> for more details on pointcut
 expressions in Spring.
 
-A common requirement is to make an entire service layer transactional. The best way to
+A common requirement is to make an entire com.service layer transactional. The best way to
 do this is to change the pointcut expression to match any operation in your
-service layer. The following example shows how to do so:
+com.service layer. The following example shows how to do so:
 
 [source,xml,indent=0,subs="verbatim"]
 ----
-	<aop:config>
-		<aop:pointcut id="fooServiceMethods" expression="execution(* x.y.service.*.*(..))"/>
+	<aop:com.config>
+		<aop:pointcut id="fooServiceMethods" expression="execution(* x.y.com.service.*.*(..))"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="fooServiceMethods"/>
-	</aop:config>
+	</aop:com.config>
 ----
 
-NOTE: In the preceding example, it is assumed that all your service interfaces are defined
-in the `x.y.service` package. See <<core.adoc#aop, the AOP section>> for more details.
+NOTE: In the preceding example, it is assumed that all your com.service interfaces are defined
+in the `x.y.com.service` package. See <<core.adoc#aop, the AOP section>> for more details.
 
 Now that we have analyzed the configuration, you may be asking yourself,
 "`What does all this configuration actually do?`"
@@ -802,25 +802,25 @@ insertFoo(..) method of the DefaultFooService class have been truncated for clar
 	[AspectJInvocationContextExposingAdvisorAutoProxyCreator] - Creating implicit proxy for bean 'fooService' with 0 common interceptors and 1 specific interceptors
 
 	<!-- the DefaultFooService is actually proxied -->
-	[JdkDynamicAopProxy] - Creating JDK dynamic proxy for [x.y.service.DefaultFooService]
+	[JdkDynamicAopProxy] - Creating JDK dynamic proxy for [x.y.com.service.DefaultFooService]
 
 	<!-- ... the insertFoo(..) method is now being invoked on the proxy -->
-	[TransactionInterceptor] - Getting transaction for x.y.service.FooService.insertFoo
+	[TransactionInterceptor] - Getting transaction for x.y.com.service.FooService.insertFoo
 
 	<!-- the transactional advice kicks in here... -->
-	[DataSourceTransactionManager] - Creating new transaction with name [x.y.service.FooService.insertFoo]
+	[DataSourceTransactionManager] - Creating new transaction with name [x.y.com.service.FooService.insertFoo]
 	[DataSourceTransactionManager] - Acquired Connection [org.apache.commons.dbcp.PoolableConnection@a53de4] for JDBC transaction
 
 	<!-- the insertFoo(..) method from DefaultFooService throws an exception... -->
 	[RuleBasedTransactionAttribute] - Applying rules to determine whether transaction should rollback on java.lang.UnsupportedOperationException
-	[TransactionInterceptor] - Invoking rollback for transaction on x.y.service.FooService.insertFoo due to throwable [java.lang.UnsupportedOperationException]
+	[TransactionInterceptor] - Invoking rollback for transaction on x.y.com.service.FooService.insertFoo due to throwable [java.lang.UnsupportedOperationException]
 
 	<!-- and the transaction is rolled back (by default, RuntimeException instances cause rollback) -->
 	[DataSourceTransactionManager] - Rolling back JDBC transaction on Connection [org.apache.commons.dbcp.PoolableConnection@a53de4]
 	[DataSourceTransactionManager] - Releasing JDBC Connection after transaction
 	[DataSourceUtils] - Returning JDBC Connection to DataSource
 
-	Exception in thread "main" java.lang.UnsupportedOperationException at x.y.service.DefaultFooService.insertFoo(DefaultFooService.java:14)
+	Exception in thread "main" java.lang.UnsupportedOperationException at x.y.com.service.DefaultFooService.insertFoo(DefaultFooService.java:14)
 	<!-- AOP infrastructure stack trace elements removed for clarity -->
 	at $Proxy0.insertFoo(Unknown Source)
 	at Boot.main(Boot.java:11)
@@ -831,7 +831,7 @@ insertFoo(..) method of the DefaultFooService class have been truncated for clar
 ==== Rolling Back a Declarative Transaction
 
 The previous section outlined the basics of how to specify transactional settings for
-classes, typically service layer classes, declaratively in your application. This
+classes, typically com.service layer classes, declaratively in your application. This
 section describes how you can control the rollback of transactions in a simple,
 declarative fashion.
 
@@ -930,13 +930,13 @@ usage flies in the face of achieving a clean POJO-based architecture.
 [[transaction-declarative-diff-tx]]
 ==== Configuring Different Transactional Semantics for Different Beans
 
-Consider the scenario where you have a number of service layer objects, and you want to
+Consider the scenario where you have a number of com.service layer objects, and you want to
 apply a totally different transactional configuration to each of them. You can do so
 by defining distinct `<aop:advisor/>` elements with differing `pointcut` and
 `advice-ref` attribute values.
 
-As a point of comparison, first assume that all of your service layer classes are
-defined in a root `x.y.service` package. To make all beans that are instances of classes
+As a point of comparison, first assume that all of your com.service layer classes are
+defined in a root `x.y.com.service` package. To make all beans that are instances of classes
 defined in that package (or in subpackages) and that have names ending in `Service` have
 the default transactional configuration, you could write the following:
 
@@ -955,22 +955,22 @@ the default transactional configuration, you could write the following:
 			http://www.springframework.org/schema/aop
 			https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-		<aop:config>
+		<aop:com.config>
 
 			<aop:pointcut id="serviceOperation"
-					expression="execution(* x.y.service..*Service.*(..))"/>
+					expression="execution(* x.y.com.service..*Service.*(..))"/>
 
 			<aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice"/>
 
-		</aop:config>
+		</aop:com.config>
 
 		<!-- these two beans will be transactional... -->
-		<bean id="fooService" class="x.y.service.DefaultFooService"/>
-		<bean id="barService" class="x.y.service.extras.SimpleBarService"/>
+		<bean id="fooService" class="x.y.com.service.DefaultFooService"/>
+		<bean id="barService" class="x.y.com.service.extras.SimpleBarService"/>
 
 		<!-- ... and these two beans won't -->
 		<bean id="anotherService" class="org.xyz.SomeService"/> <!-- (not in the right package) -->
-		<bean id="barManager" class="x.y.service.SimpleBarManager"/> <!-- (doesn't end in 'Service') -->
+		<bean id="barManager" class="x.y.com.service.SimpleBarManager"/> <!-- (doesn't end in 'Service') -->
 
 		<tx:advice id="txAdvice">
 			<tx:attributes>
@@ -1002,25 +1002,25 @@ transactional settings:
 			http://www.springframework.org/schema/aop
 			https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-		<aop:config>
+		<aop:com.config>
 
 			<aop:pointcut id="defaultServiceOperation"
-					expression="execution(* x.y.service.*Service.*(..))"/>
+					expression="execution(* x.y.com.service.*Service.*(..))"/>
 
 			<aop:pointcut id="noTxServiceOperation"
-					expression="execution(* x.y.service.ddl.DefaultDdlManager.*(..))"/>
+					expression="execution(* x.y.com.service.ddl.DefaultDdlManager.*(..))"/>
 
 			<aop:advisor pointcut-ref="defaultServiceOperation" advice-ref="defaultTxAdvice"/>
 
 			<aop:advisor pointcut-ref="noTxServiceOperation" advice-ref="noTxAdvice"/>
 
-		</aop:config>
+		</aop:com.config>
 
 		<!-- this bean will be transactional (see the 'defaultServiceOperation' pointcut) -->
-		<bean id="fooService" class="x.y.service.DefaultFooService"/>
+		<bean id="fooService" class="x.y.com.service.DefaultFooService"/>
 
 		<!-- this bean will also be transactional, but with totally different transactional settings -->
-		<bean id="anotherFooService" class="x.y.service.ddl.DefaultDdlManager"/>
+		<bean id="anotherFooService" class="x.y.com.service.ddl.DefaultDdlManager"/>
 
 		<tx:advice id="defaultTxAdvice">
 			<tx:attributes>
@@ -1124,7 +1124,7 @@ Consider the following class definition:
 [source,java,indent=0,subs="verbatim,quotes",role="primary"]
 .Java
 ----
-	// the service class that we want to make transactional
+	// the com.service class that we want to make transactional
 	@Transactional
 	public class DefaultFooService implements FooService {
 
@@ -1148,7 +1148,7 @@ Consider the following class definition:
 [source,kotlin,indent=0,subs="verbatim,quotes",role="secondary"]
 .Kotlin
 ----
-	// the service class that we want to make transactional
+	// the com.service class that we want to make transactional
 	@Transactional
 	class DefaultFooService : FooService {
 
@@ -1200,8 +1200,8 @@ In XML configuration, the `<tx:annotation-driven/>` tag provides similar conveni
 			http://www.springframework.org/schema/aop
 			https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-		<!-- this is the service object that we want to make transactional -->
-		<bean id="fooService" class="x.y.service.DefaultFooService"/>
+		<!-- this is the com.service object that we want to make transactional -->
+		<bean id="fooService" class="x.y.com.service.DefaultFooService"/>
 
 		<!-- enable the configuration of transactional behavior based on annotations -->
 		<tx:annotation-driven transaction-manager="txManager"/><!-- a PlatformTransactionManager is still required --> <1>
@@ -1589,8 +1589,8 @@ image::images/tx_prop_required.png[]
 `PROPAGATION_REQUIRED` enforces a physical transaction, either locally for the current
 scope if no transaction exists yet or participating in an existing 'outer' transaction
 defined for a larger scope. This is a fine default in common call stack arrangements
-within the same thread (for example, a service facade that delegates to several repository methods
-where all the underlying resources have to participate in the service-level transaction).
+within the same thread (for example, a com.service facade that delegates to several repository methods
+where all the underlying resources have to participate in the com.service-level transaction).
 
 NOTE: By default, a participating transaction joins the characteristics of the outer scope,
 silently ignoring the local isolation level, timeout value, or read-only flag (if any).
@@ -1754,7 +1754,7 @@ transactional aspects applied to it in the desired order:
 			http://www.springframework.org/schema/aop
 			https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-		<bean id="fooService" class="x.y.service.DefaultFooService"/>
+		<bean id="fooService" class="x.y.com.service.DefaultFooService"/>
 
 		<!-- this is the aspect -->
 		<bean id="profiler" class="x.y.SimpleProfiler">
@@ -1764,14 +1764,14 @@ transactional aspects applied to it in the desired order:
 
 		<tx:annotation-driven transaction-manager="txManager" order="200"/>
 
-		<aop:config>
+		<aop:com.config>
 				<!-- this advice will execute around the transactional advice -->
 				<aop:aspect id="profilingAspect" ref="profiler">
 					<aop:pointcut id="serviceMethodWithReturnValue"
 							expression="execution(!void x.y..*Service.*(..))"/>
 					<aop:around method="profile" pointcut-ref="serviceMethodWithReturnValue"/>
 				</aop:aspect>
-		</aop:config>
+		</aop:com.config>
 
 		<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 			<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
@@ -1808,7 +1808,7 @@ declarative approach:
 			http://www.springframework.org/schema/aop
 			https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-		<bean id="fooService" class="x.y.service.DefaultFooService"/>
+		<bean id="fooService" class="x.y.com.service.DefaultFooService"/>
 
 		<!-- the profiling advice -->
 		<bean id="profiler" class="x.y.SimpleProfiler">
@@ -1816,7 +1816,7 @@ declarative approach:
 			<property name="order" value="1"/>
 		</bean>
 
-		<aop:config>
+		<aop:com.config>
 			<aop:pointcut id="entryPointMethod" expression="execution(* x.y..*Service.*(..))"/>
 			<!-- will execute after the profiling advice (c.f. the order attribute) -->
 
@@ -1829,7 +1829,7 @@ declarative approach:
 				<aop:around method="profile" pointcut-ref="serviceMethodWithReturnValue"/>
 			</aop:aspect>
 
-		</aop:config>
+		</aop:com.config>
 
 		<tx:advice id="txAdvice" transaction-manager="txManager">
 			<tx:attributes>
@@ -2664,7 +2664,7 @@ with a `DataSource` reference, or you can configure it in a Spring IoC container
 DAOs as a bean reference.
 
 NOTE: The `DataSource` should always be configured as a bean in the Spring IoC container. In
-the first case the bean is given to the service directly; in the second case it is given
+the first case the bean is given to the com.service directly; in the second case it is given
 to the prepared template.
 
 All SQL issued by this class is logged at the `DEBUG` level under the category
@@ -6183,8 +6183,8 @@ configurations in a concrete context.
 
 The major goal of Spring's ORM integration is clear application layering (with any data
 access and transaction technology) and for loose coupling of application objects -- no
-more business service dependencies on the data access or transaction strategy, no more
-hard-coded resource lookups, no more hard-to-replace singletons, no more custom service
+more business com.service dependencies on the data access or transaction strategy, no more
+hard-coded resource lookups, no more hard-to-replace singletons, no more custom com.service
 registries. The goal is to have one simple and consistent approach to wiring up application objects, keeping
 them as reusable and free from container dependencies as possible. All the individual
 data access features are usable on their own but integrate nicely with Spring's
@@ -6470,7 +6470,7 @@ focus on adding business logic, which is the real value of your application.
 NOTE: Before you continue, we are strongly encourage you to read <<transaction-declarative>>
 if you have not already done so.
 
-You can annotate the service layer with `@Transactional` annotations and instruct the
+You can annotate the com.service layer with `@Transactional` annotations and instruct the
 Spring container to find these annotations and provide transactional semantics for
 these annotated methods. The following example shows how to do so:
 
@@ -6554,11 +6554,11 @@ processing at runtime. The following example shows how to do so:
 
 You can demarcate transactions in a higher level of the application, on top of
 lower-level data access services that span any number of operations. Nor do restrictions
-exist on the implementation of the surrounding business service. It needs only a Spring
+exist on the implementation of the surrounding business com.service. It needs only a Spring
 `PlatformTransactionManager`. Again, the latter can come from anywhere, but preferably
 as a bean reference through a `setTransactionManager(..)` method. Also, the
 `productDAO` should be set by a `setProductDao(..)` method. The following pair of snippets show
-a transaction manager and a business service definition in a Spring application context
+a transaction manager and a business com.service definition in a Spring application context
 and an example for a business method implementation:
 
 [source,xml,indent=0,subs="verbatim,quotes"]
@@ -6647,7 +6647,7 @@ For distributed transactions across multiple Hibernate session factories, you ca
 `JtaTransactionManager` as a transaction strategy with multiple
 `LocalSessionFactoryBean` definitions. Each DAO then gets one specific `SessionFactory`
 reference passed into its corresponding bean property. If all underlying JDBC data
-sources are transactional container ones, a business service can demarcate transactions
+sources are transactional container ones, a business com.service can demarcate transactions
 across any number of DAOs and any number of session factories without special regard, as
 long as it uses `JtaTransactionManager` as the strategy.
 
@@ -7135,7 +7135,7 @@ injection of the default `EntityManagerFactory`, as the following example bean d
 ----
 
 As an alternative to explicitly defining a `PersistenceAnnotationBeanPostProcessor`,
-consider using the Spring `context:annotation-config` XML element in your application
+consider using the Spring `context:annotation-com.config` XML element in your application
 context configuration. Doing so automatically registers all Spring standard
 post-processors for annotation-based configuration, including
 `CommonAnnotationBeanPostProcessor` and so on.
@@ -7146,8 +7146,8 @@ Consider the following example:
 ----
 	<beans>
 
-		<!-- post-processors for all standard config annotations -->
-		<context:annotation-config/>
+		<!-- post-processors for all standard com.config annotations -->
+		<context:annotation-com.config/>
 
 		<bean id="myProductDao" class="product.ProductDaoImpl"/>
 
@@ -7694,7 +7694,7 @@ This sample application produces the following `settings.xml` file:
 
 
 
-[[oxm-schema-based-config]]
+[[oxm-schema-based-com.config]]
 === XML Configuration Namespace
 
 You can configure marshallers more concisely by using tags from the OXM namespace. To

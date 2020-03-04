@@ -101,7 +101,7 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	 * <p>Also see {@link #setUseRegisteredSuffixPatternMatch(boolean)} for
 	 * more fine-grained control over specific suffixes to allow.
 	 * @deprecated as of 5.2.4. See class level comment about deprecation of
-	 * path extension config options.
+	 * path extension com.config options.
 	 */
 	@Deprecated
 	public void setUseSuffixPatternMatch(boolean useSuffixPatternMatch) {
@@ -115,7 +115,7 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	 * when a "." appears in the path for other reasons.
 	 * <p>By default this is set to "false".
 	 * @deprecated as of 5.2.4. See class level comment about deprecation of
-	 * path extension config options note also that in 5.3 the default for this
+	 * path extension com.config options note also that in 5.3 the default for this
 	 * property will switch from {@code false} to {@code true}.
 	 */
 	@Deprecated
@@ -134,9 +134,9 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	}
 
 	/**
-	 * Configure path prefixes to apply to controller methods.
+	 * Configure path prefixes to apply to com.controller methods.
 	 * <p>Prefixes are used to enrich the mappings of every {@code @RequestMapping}
-	 * method whose controller type is matched by the corresponding
+	 * method whose com.controller type is matched by the corresponding
 	 * {@code Predicate}. The prefix for the first matching predicate is used.
 	 * <p>Consider using {@link org.springframework.web.method.HandlerTypePredicate
 	 * HandlerTypePredicate} to group controllers.
@@ -194,7 +194,7 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	/**
 	 * Whether to use registered suffixes for pattern matching.
 	 * @deprecated as of 5.2.4. See class-level note on the deprecation of path
-	 * extension config options.
+	 * extension com.config options.
 	 */
 	@Deprecated
 	public boolean useSuffixPatternMatch() {
@@ -204,7 +204,7 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	/**
 	 * Whether to use registered suffixes for pattern matching.
 	 * @deprecated as of 5.2.4. See class-level note on the deprecation of path
-	 * extension config options.
+	 * extension com.config options.
 	 */
 	@Deprecated
 	public boolean useRegisteredSuffixPatternMatch() {
@@ -221,7 +221,7 @@ public class RequestMappingHandlerMapping extends RequestMappingInfoHandlerMappi
 	/**
 	 * Return the file extensions to use for suffix pattern matching.
 	 * @deprecated as of 5.2.4. See class-level note on the deprecation of path
-	 * extension config options.
+	 * extension com.config options.
 	 */
 	@Nullable
 	@Deprecated

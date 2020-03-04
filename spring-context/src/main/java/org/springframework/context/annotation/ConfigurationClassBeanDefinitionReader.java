@@ -461,7 +461,7 @@ class ConfigurationClassBeanDefinitionReader {
 						}
 					}
 					if (allSkipped) {
-						// The config classes that imported this one were all skipped, therefore we are skipped...
+						// The com.config classes that imported this one were all skipped, therefore we are skipped...
 						skip = true;
 					}
 				}

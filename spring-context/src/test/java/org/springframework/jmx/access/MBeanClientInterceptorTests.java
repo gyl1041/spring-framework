@@ -185,7 +185,7 @@ class MBeanClientInterceptorTests extends AbstractMBeanServerTests {
 
 		final int port = SocketUtils.findAvailableTcpPort();
 
-		JMXServiceURL url = new JMXServiceURL("service:jmx:jmxmp://localhost:" + port);
+		JMXServiceURL url = new JMXServiceURL("com.service:jmx:jmxmp://localhost:" + port);
 		JMXConnectorServer connector = JMXConnectorServerFactory.newJMXConnectorServer(url, null, getServer());
 
 		MBeanProxyFactoryBean factory = new MBeanProxyFactoryBean();

@@ -88,7 +88,7 @@ public class ConfigurationClassProcessingTests {
 	private void customBeanNameIsRespected(Class<?> testClass, Supplier<TestBean> testBeanSupplier, String beanName) {
 		GenericApplicationContext ac = new GenericApplicationContext();
 		AnnotationConfigUtils.registerAnnotationConfigProcessors(ac);
-		ac.registerBeanDefinition("config", new RootBeanDefinition(testClass));
+		ac.registerBeanDefinition("com.config", new RootBeanDefinition(testClass));
 		ac.refresh();
 
 		assertThat(ac.getBean(beanName)).isSameAs(testBeanSupplier.get());
@@ -126,7 +126,7 @@ public class ConfigurationClassProcessingTests {
 	public void configWithBeanWithProviderImplementation() {
 		GenericApplicationContext ac = new GenericApplicationContext();
 		AnnotationConfigUtils.registerAnnotationConfigProcessors(ac);
-		ac.registerBeanDefinition("config", new RootBeanDefinition(ConfigWithBeanWithProviderImplementation.class));
+		ac.registerBeanDefinition("com.config", new RootBeanDefinition(ConfigWithBeanWithProviderImplementation.class));
 		ac.refresh();
 		assertThat(ConfigWithBeanWithProviderImplementation.testBean).isSameAs(ac.getBean("customName"));
 	}
@@ -135,7 +135,7 @@ public class ConfigurationClassProcessingTests {
 	public void configWithSetWithProviderImplementation() {
 		GenericApplicationContext ac = new GenericApplicationContext();
 		AnnotationConfigUtils.registerAnnotationConfigProcessors(ac);
-		ac.registerBeanDefinition("config", new RootBeanDefinition(ConfigWithSetWithProviderImplementation.class));
+		ac.registerBeanDefinition("com.config", new RootBeanDefinition(ConfigWithSetWithProviderImplementation.class));
 		ac.refresh();
 		assertThat(ConfigWithSetWithProviderImplementation.set).isSameAs(ac.getBean("customName"));
 	}
@@ -292,7 +292,7 @@ public class ConfigurationClassProcessingTests {
 	 * Creates a new {@link BeanFactory}, populates it with a {@link BeanDefinition}
 	 * for each of the given {@link Configuration} {@code configClasses}, and then
 	 * post-processes the factory using JavaConfig's {@link ConfigurationClassPostProcessor}.
-	 * When complete, the factory is ready to service requests for any {@link Bean} methods
+	 * When complete, the factory is ready to com.service requests for any {@link Bean} methods
 	 * declared by {@code configClasses}.
 	 */
 	private DefaultListableBeanFactory initBeanFactory(Class<?>... configClasses) {

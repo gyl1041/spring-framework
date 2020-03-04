@@ -203,7 +203,7 @@ public class HttpComponentsClientHttpRequestFactory implements ClientHttpRequest
 
 	/**
 	 * Create a default {@link RequestConfig} to use with the given client.
-	 * Can return {@code null} to indicate that no custom request config should
+	 * Can return {@code null} to indicate that no custom request com.config should
 	 * be set and the defaults of the {@link HttpClient} should be used.
 	 * <p>The default implementation tries to merge the defaults of the client
 	 * with the local customizations of this factory instance, if any.
@@ -224,8 +224,8 @@ public class HttpComponentsClientHttpRequestFactory implements ClientHttpRequest
 	/**
 	 * Merge the given {@link HttpClient}-level {@link RequestConfig} with
 	 * the factory-level {@link RequestConfig}, if necessary.
-	 * @param clientConfig the config held by the current
-	 * @return the merged request config
+	 * @param clientConfig the com.config held by the current
+	 * @return the merged request com.config
 	 * @since 4.2
 	 */
 	protected RequestConfig mergeRequestConfig(RequestConfig clientConfig) {

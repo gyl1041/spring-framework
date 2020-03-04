@@ -91,7 +91,7 @@ public final class PatternsRequestCondition extends AbstractRequestCondition<Pat
 	 * @param useTrailingSlashMatch whether to match irrespective of a trailing slash
 	 * @deprecated as of 5.2.4. See class-level note in
 	 * {@link org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping}
-	 * on the deprecation of path extension config options.
+	 * on the deprecation of path extension com.config options.
 	 */
 	@Deprecated
 	public PatternsRequestCondition(String[] patterns, @Nullable UrlPathHelper urlPathHelper,
@@ -110,7 +110,7 @@ public final class PatternsRequestCondition extends AbstractRequestCondition<Pat
 	 * @param fileExtensions a list of file extensions to consider for path matching
 	 * @deprecated as of 5.2.4. See class-level note in
 	 * {@link org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping}
-	 * on the deprecation of path extension config options.
+	 * on the deprecation of path extension com.config options.
 	 */
 	@Deprecated
 	public PatternsRequestCondition(String[] patterns, @Nullable UrlPathHelper urlPathHelper,

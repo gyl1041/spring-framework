@@ -44,7 +44,7 @@ import org.springframework.util.StringUtils;
  *
  * <p>Also a {@code HttpMessageWriter} that pre-resolves encoding hints
  * from the extra information available on the server side such as the request
- * or controller method annotations.
+ * or com.controller method annotations.
  *
  * @author Arjen Poutsma
  * @author Sebastien Deleuze
@@ -204,7 +204,7 @@ public class EncoderHttpMessageWriter<T> implements HttpMessageWriter<T> {
 
 	/**
 	 * Get additional hints for encoding for example based on the server request
-	 * or annotations from controller method parameters. By default, delegate to
+	 * or annotations from com.controller method parameters. By default, delegate to
 	 * the encoder if it is an instance of {@link HttpMessageEncoder}.
 	 */
 	protected Map<String, Object> getWriteHints(ResolvableType streamType, ResolvableType elementType,

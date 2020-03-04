@@ -66,7 +66,7 @@ public class ResourceHandlerRegistryTests {
 	public void setup() {
 		this.registry = new ResourceHandlerRegistry(new GenericApplicationContext());
 		this.registration = this.registry.addResourceHandler("/resources/**");
-		this.registration.addResourceLocations("classpath:org/springframework/web/reactive/config/");
+		this.registration.addResourceLocations("classpath:org/springframework/web/reactive/com.config/");
 	}
 
 

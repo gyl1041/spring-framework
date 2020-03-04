@@ -343,7 +343,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 		// In this case, no proxy will have an instance of this object's configuration,
 		// but will have an independent copy.
 		if (logger.isTraceEnabled()) {
-			logger.trace("Creating copy of prototype ProxyFactoryBean config: " + this);
+			logger.trace("Creating copy of prototype ProxyFactoryBean com.config: " + this);
 		}
 
 		ProxyCreatorSupport copy = new ProxyCreatorSupport(getAopProxyFactory());

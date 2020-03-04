@@ -32,9 +32,9 @@ import org.springframework.util.ClassUtils;
  * this accessor also performs narrowing through {@link javax.rmi.PortableRemoteObject}.
  *
  * <p>With conventional RMI services, this invoker is typically used with the RMI
- * service interface. Alternatively, this invoker can also proxy a remote RMI service
+ * com.service interface. Alternatively, this invoker can also proxy a remote RMI com.service
  * with a matching non-RMI business interface, i.e. an interface that mirrors the RMI
- * service methods but does not declare RemoteExceptions. In the latter case,
+ * com.service methods but does not declare RemoteExceptions. In the latter case,
  * RemoteExceptions thrown by the RMI stub will automatically get converted to
  * Spring's unchecked RemoteAccessException.
  *

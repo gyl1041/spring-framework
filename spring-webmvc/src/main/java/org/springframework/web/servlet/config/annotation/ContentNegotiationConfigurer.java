@@ -131,7 +131,7 @@ public class ContentNegotiationConfigurer {
 	 * {@code "application/pdf"} regardless of the 'Accept' header.
 	 * @deprecated as of 5.2.4. See class-level note in
 	 * {@link ContentNegotiationManagerFactoryBean} on the deprecation of path
-	 * extension config options.
+	 * extension com.config options.
 	 */
 	@Deprecated
 	public ContentNegotiationConfigurer favorPathExtension(boolean favorPathExtension) {
@@ -189,7 +189,7 @@ public class ContentNegotiationConfigurer {
 	 * <p>By default this is set to {@code true}.
 	 * @deprecated as of 5.2.4. See class-level note in
 	 * {@link ContentNegotiationManagerFactoryBean} on the deprecation of path
-	 * extension config options.
+	 * extension com.config options.
 	 */
 	@Deprecated
 	public ContentNegotiationConfigurer ignoreUnknownPathExtensions(boolean ignore) {

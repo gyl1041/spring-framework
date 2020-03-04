@@ -105,7 +105,7 @@ class DispatcherHandlerIntegrationTests extends AbstractHttpHandlerIntegrationTe
 		startServer(httpServer);
 
 		ResponseEntity<Person> result =
-				this.restTemplate.getForEntity("http://localhost:" + this.port + "/controller", Person.class);
+				this.restTemplate.getForEntity("http://localhost:" + this.port + "/com.controller", Person.class);
 
 		assertThat(result.getStatusCode()).isEqualTo(HttpStatus.OK);
 		assertThat(result.getBody().getName()).isEqualTo("John");
@@ -214,7 +214,7 @@ class DispatcherHandlerIntegrationTests extends AbstractHttpHandlerIntegrationTe
 	@Controller
 	public static class PersonController {
 
-		@RequestMapping("/controller")
+		@RequestMapping("/com.controller")
 		@ResponseBody
 		public Mono<Person> controller() {
 			return Mono.just(new Person("John"));

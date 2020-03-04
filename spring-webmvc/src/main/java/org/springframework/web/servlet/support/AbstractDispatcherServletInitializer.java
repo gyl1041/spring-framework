@@ -40,7 +40,7 @@ import org.springframework.web.servlet.FrameworkServlet;
  * Base class for {@link org.springframework.web.WebApplicationInitializer}
  * implementations that register a {@link DispatcherServlet} in the servlet context.
  *
- * <p>Most applications should consider extending the Spring Java config subclass
+ * <p>Most applications should consider extending the Spring Java com.config subclass
  * {@link AbstractAnnotationConfigDispatcherServletInitializer}.
  *
  * @author Arjen Poutsma

@@ -40,24 +40,24 @@ public class CandidateComponentsIndexTests {
 	public void getCandidateTypes() {
 		CandidateComponentsIndex index = new CandidateComponentsIndex(
 				Collections.singletonList(createSampleProperties()));
-		Set<String> actual = index.getCandidateTypes("com.example.service", "service");
-		assertThat(actual).contains("com.example.service.One",
-				"com.example.service.sub.Two", "com.example.service.Three");
+		Set<String> actual = index.getCandidateTypes("com.example.com.service", "service");
+		assertThat(actual).contains("com.example.com.service.One",
+				"com.example.com.service.sub.Two", "com.example.com.service.Three");
 	}
 
 	@Test
 	public void getCandidateTypesSubPackage() {
 		CandidateComponentsIndex index = new CandidateComponentsIndex(
 				Collections.singletonList(createSampleProperties()));
-		Set<String> actual = index.getCandidateTypes("com.example.service.sub", "service");
-		assertThat(actual).contains("com.example.service.sub.Two");
+		Set<String> actual = index.getCandidateTypes("com.example.com.service.sub", "service");
+		assertThat(actual).contains("com.example.com.service.sub.Two");
 	}
 
 	@Test
 	public void getCandidateTypesSubPackageNoMatch() {
 		CandidateComponentsIndex index = new CandidateComponentsIndex(
 				Collections.singletonList(createSampleProperties()));
-		Set<String> actual = index.getCandidateTypes("com.example.service.none", "service");
+		Set<String> actual = index.getCandidateTypes("com.example.com.service.none", "service");
 		assertThat(actual).isEmpty();
 	}
 
@@ -65,7 +65,7 @@ public class CandidateComponentsIndexTests {
 	public void getCandidateTypesNoMatch() {
 		CandidateComponentsIndex index = new CandidateComponentsIndex(
 				Collections.singletonList(createSampleProperties()));
-		Set<String> actual = index.getCandidateTypes("com.example.service", "entity");
+		Set<String> actual = index.getCandidateTypes("com.example.com.service", "entity");
 		assertThat(actual).isEmpty();
 	}
 
@@ -88,9 +88,9 @@ public class CandidateComponentsIndexTests {
 
 	private static Properties createSampleProperties() {
 		Properties properties = new Properties();
-		properties.put("com.example.service.One", "service");
-		properties.put("com.example.service.sub.Two", "service");
-		properties.put("com.example.service.Three", "service");
+		properties.put("com.example.com.service.One", "service");
+		properties.put("com.example.com.service.sub.Two", "service");
+		properties.put("com.example.com.service.Three", "service");
 		properties.put("com.example.domain.Four", "entity");
 		return properties;
 	}

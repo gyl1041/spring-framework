@@ -68,10 +68,10 @@ class JmsListenerContainerParser extends AbstractListenerContainerParser {
 			return null; // Not supported
 		}
 		else if ("".equals(containerType) || containerType.startsWith("default")) {
-			factoryDef.setBeanClassName("org.springframework.jms.config.DefaultJmsListenerContainerFactory");
+			factoryDef.setBeanClassName("org.springframework.jms.com.config.DefaultJmsListenerContainerFactory");
 		}
 		else if (containerType.startsWith("simple")) {
-			factoryDef.setBeanClassName("org.springframework.jms.config.SimpleJmsListenerContainerFactory");
+			factoryDef.setBeanClassName("org.springframework.jms.com.config.SimpleJmsListenerContainerFactory");
 		}
 
 		factoryDef.getPropertyValues().addPropertyValues(commonContainerProperties);

@@ -205,7 +205,7 @@ public interface RSocketStrategies {
 		 * {@link ServerRSocketFactory ServerRSocketFactory} must be configured
 		 * accordingly for zero copy too.
 		 * <p>If using {@link DefaultDataBufferFactory} instead, there is no
-		 * need for related config changes in RSocket.
+		 * need for related com.config changes in RSocket.
 		 */
 		Builder dataBufferFactory(@Nullable DataBufferFactory bufferFactory);
 
